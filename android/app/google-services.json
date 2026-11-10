@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "349945167782",
+    "project_id": "gestor-tareas-652de",
+    "storage_bucket": "gestor-tareas-652de.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349945167782:android:8109626c9a0f3cc1371967",
+        "android_client_info": {
+          "package_name": "com.example.gestor_tareas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG0TYU6Q30aceNerJSmHmYGLnAI3tsjFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
