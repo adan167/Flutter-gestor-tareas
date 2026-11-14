@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gestor_tareas/providers/theme_provider.dart';
+import 'package:gestor_tareas/widgets/edit_name_dialog.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -21,6 +22,40 @@ void main() {
 
     expect(find.text('noviembre de 2026'), findsOneWidget);
   });
+
+  testWidgets(
+    'El diálogo de nombre cierra el campo antes de liberar su controller',
+    (tester) async {
+      String? savedName;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: TextButton(
+                onPressed: () async {
+                  savedName = await showDialog<String>(
+                    context: context,
+                    builder: (_) => const EditNameDialog(initialName: 'Ana'),
+                  );
+                },
+                child: const Text('Abrir'),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Abrir'));
+      await tester.pumpAndSettle();
+      expect(find.text('Ana'), findsOneWidget);
+
+      await tester.tap(find.text('Guardar'));
+      await tester.pumpAndSettle();
+
+      expect(savedName, 'Ana');
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('La personalización actualiza el color y el modo oscuro', (
     tester,

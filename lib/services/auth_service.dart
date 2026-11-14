@@ -25,4 +25,22 @@ class AuthService {
 
   /// Cierra la sesión.
   Future<void> logout() => _auth.signOut();
+
+  /// Actualiza el nombre visible de la cuenta.
+  Future<void> updateDisplayName(String name) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw StateError('Debes iniciar sesión para editar tu perfil.');
+    }
+    await user.updateDisplayName(name);
+  }
+
+  /// Guarda el identificador de un avatar integrado en el campo de foto.
+  Future<void> updateAvatar(String avatarId) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw StateError('Debes iniciar sesión para editar tu perfil.');
+    }
+    await user.updatePhotoURL('gestor-avatar:$avatarId');
+  }
 }
